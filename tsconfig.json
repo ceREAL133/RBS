@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"types": ["./src/type-definitions/express.d.ts"],
 		"target": "ES2020",
 		"module": "commonjs",
 		"outDir": "dist",
