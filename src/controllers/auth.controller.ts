@@ -1,11 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 import { authService } from '../services/auth.service';
+import { User } from '../models/user.model';
+import { IUserDocument, Roles } from '../interfaces/users.interfaces';
 
 let token: { accessToken: string };
 
 export const registerUser = async (req: Request, res: Response) => {
 	try {
-		const user = await authService.register(req.body);
+		const admin = (await User.findOne({ role: Roles.ADMINISTRATOR })) as IUserDocument;
+		const bossId = req.body.bossId ?? admin.id;
+
+		const user = await authService.register({ ...req.body, bossId });
 
 		return res.status(200).send(user);
 	} catch (e: any) {
@@ -31,9 +36,4 @@ export const addHeader = (req: Request, res: Response, next: NextFunction) => {
 	}
 
 	next();
-};
-
-/// dont forget to remove it
-export const healthcheck = async (req: Request, res: Response) => {
-	res.status(200).send('all good');
 };
