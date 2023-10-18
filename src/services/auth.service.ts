@@ -1,4 +1,4 @@
-import { ILoginData, IUser, IUserDocument } from '../interfaces/users.interfaces';
+import { ILoginData, IUser, IUserDocument, Roles } from '../interfaces/users.interfaces';
 import { User } from '../models/user.model';
 import { sign } from 'jsonwebtoken';
 import 'dotenv/config';
@@ -6,8 +6,9 @@ import 'dotenv/config';
 const secret = process.env.SECRET_KEY as string;
 
 export class AuthService {
-	async register(data: IUser): Promise<IUser> {
-		const user = await User.create(data);
+	async register(data: IUser): Promise<IUserDocument> {
+		// every new user has role USER when registered
+		const user = await User.create({ ...data, role: Roles.USER });
 
 		return user;
 	}

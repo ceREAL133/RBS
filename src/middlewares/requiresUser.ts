@@ -2,7 +2,6 @@ import { NextFunction, Response, Request } from 'express';
 import { verify } from 'jsonwebtoken';
 import 'dotenv/config';
 import { User } from '../models/user.model';
-import { IUser, IUserRequest } from '../interfaces/users.interfaces';
 
 export const requiresUser = async (req: Request, res: Response, next: NextFunction) => {
 	const token = req.headers.authorization as string;
