@@ -21,13 +21,13 @@ export class AuthService {
 		return { accessToken };
 	}
 
-	createAccessToken(id: string) {
+	private createAccessToken(id: string) {
 		const accessToken = sign({ id }, secret, { expiresIn: '1h' });
 
 		return accessToken;
 	}
 
-	async validatePassword(data: ILoginData): Promise<{ id: string }> {
+	private async validatePassword(data: ILoginData): Promise<{ id: string }> {
 		const user = await User.findOne({ email: data.email });
 
 		if (!user) {

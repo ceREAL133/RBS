@@ -4,7 +4,7 @@ import { IUserDocument, Roles } from '../interfaces/users.interfaces';
 import { userService } from '../services/user.service';
 
 export const changeBossController = async (req: Request, res: Response) => {
-	const currentUser = (await User.findById(req.userId)) as IUserDocument;
+	const currentUser = await userService.findUserById(req.userId);
 	const { newBossId } = req.body;
 	const { id } = req.params;
 
@@ -23,7 +23,7 @@ export const changeBossController = async (req: Request, res: Response) => {
 };
 
 export const getUsersController = async (req: Request, res: Response) => {
-	const user = (await User.findOne({ _id: req.userId })) as IUserDocument;
+	const user = await userService.findUserById(req.userId);
 
 	try {
 		const response = await userService.getUsers(user);
