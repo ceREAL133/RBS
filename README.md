@@ -22,7 +22,7 @@ There is already an admin user in DB.
 -   `:id` query parameter - the id of the subordinate user we want to change boss for. `bossId` in the request body - the id of his new boss.
 -   If the new BOSS is a REGULAR user, his role will be changed to BOSS.
 -   If the old BOSS doesn't have subordinates now then his role will be changed to REGULAR user.
--   Boss can manipulate only with his direct child subordinates. He can't manipulate with his deep subordinates (subordinates of his subordinates), and he CAN'T make his subordinate-boss to become a subordinate of his subordinate (circular dependency).
+-   Boss can manipulate only with his direct subordinates. He can't manipulate with his deep subordinates (subordinates of his subordinates), and he CAN'T make his subordinate-boss to become a subordinate of his subordinate (circular dependency).
 -   ADMIN can change the boss for all users except himself (if it doesn't break the logic)
 
 4. `/users`
